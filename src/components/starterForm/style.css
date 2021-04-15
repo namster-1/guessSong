@@ -1,0 +1,33 @@
+:root {
+  --font: "Poppins", sans-serif;
+}
+h1 {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 32px;
+}
+.starter-form {
+  margin-top: 200px;
+}
+label {
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 20px;
+}
+.btn {
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 15px;
+}
+::placeholder {
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 15px;
+}
+@media only screen and (max-width: 600px) {
+  ::placeholder {
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: 12px;
+  }
+}
