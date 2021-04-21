@@ -15,15 +15,19 @@ const Form: React.FC = (): JSX.Element => {
   const [inputs, setInputs] = useState<inputs[]>([
     {
       groupName: "",
-      id: undefined,
+      id: 0,
     },
   ]);
+  const [second, setSecond] = useState<string>("15");
+  const [rounds, setRounds] = useState<number>(1);
+  const time: number[] = [15, 30, 45, 60];
+  const round: number[] = [1, 2, 3, 4];
   const plusInputField = () => {
     setInputs([
       ...inputs,
       {
         groupName: "",
-        id: undefined,
+        id: inputs.length,
       },
     ]);
   };
@@ -41,7 +45,6 @@ const Form: React.FC = (): JSX.Element => {
       setInputs(removeField);
     }
   };
-
   return (
     <Router>
       <Switch>
@@ -55,7 +58,7 @@ const Form: React.FC = (): JSX.Element => {
                 <div className="form-group w-75 text-center m-auto">
                   {inputs.map((input: any, index: number) => {
                     return (
-                      <div key={index} className="bg-danger mt-3">
+                      <div key={index} className="bg-info mt-3">
                         <label htmlFor="groupName">{index + 1} group</label>
                         <input
                           placeholder="enter your group name here"
@@ -86,6 +89,38 @@ const Form: React.FC = (): JSX.Element => {
                       </div>
                     );
                   })}
+                  <label className="d-block" htmlFor="timer">
+                    enter time in seconds
+                  </label>
+                  <select
+                    id="timer"
+                    onChange={(e) => setSecond(e.target.value)}
+                    className="form-control w-25 m-auto"
+                  >
+                    {time.map(
+                      (times: number, idx: number): JSX.Element => {
+                        return (
+                          <option key={idx} value={times}>
+                            {times}
+                          </option>
+                        );
+                      }
+                    )}
+                  </select>
+                  <label htmlFor="round">choose amount of rounds</label>
+                  <select
+                    id="round"
+                    onChange={(e: any) => setRounds(e.target.value)}
+                    className="form-control w-25 m-auto"
+                  >
+                    {round.map((round, idx) => {
+                      return (
+                        <option key={idx} value={round}>
+                          {round}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
               </form>
               <div className="text-center">
@@ -99,7 +134,11 @@ const Form: React.FC = (): JSX.Element => {
           </div>
         </Route>
         <Route path="/play" exact>
-          <SongGame />
+          <SongGame
+            timerValue={parseInt(second)}
+            inputs={inputs}
+            round={rounds}
+          />
         </Route>
       </Switch>
     </Router>
