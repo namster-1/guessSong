@@ -17,7 +17,7 @@ const SongGame: React.FC<Props> = ({
   inputs,
   round,
 }): JSX.Element => {
-  const [timer, setTimer] = useState<any>(timerValue);
+  const [timer, setTimer] = useState<any>(5);
   const [word, setWord] = useState<string>("");
   const [answered, setAnswered] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
